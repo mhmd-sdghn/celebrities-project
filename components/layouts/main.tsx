@@ -1,66 +1,101 @@
 import { ReactChildren, ReactChild } from "react";
 import Head from "next/head";
-import { Container, Grid, Col, ActionIcon, Space } from "@mantine/core";
+import {
+  Container,
+  Grid,
+  Col,
+  ActionIcon,
+  Group,
+  useMantineTheme,
+} from "@mantine/core";
 import Link from "next/link";
 import NavItems from "../../config/nav";
 import GeneralConfig from "../../config/general";
 import { User } from "react-feather";
 
 function MainLayout({ children, title }: MainLayoutProps) {
+  const theme = useMantineTheme();
+
   return (
     <>
       <Head>
         <title>{title}</title>
       </Head>
-      <header>
-        <Container>
-          <Grid
-            justify='space-between'
-            align='center'
-            style={{
-              background: "#FAFAFA",
-              padding: "14px 10px 5px 10px",
-              borderRadius: "0 0 10px 10px",
-            }}
-          >
-            <Col span={11}>
-              <Grid align='center'>
-                <h1
-                  style={{
-                    fontSize: "1rem",
-                    background: "#283593",
-                    color: "#fff",
-                    borderRadius: "50px",
-                    padding: "5px 10px",
-                  }}
-                >
-                  {GeneralConfig.appName}
-                </h1>
+      <div
+        style={{
+          height: "100vh",
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gridTemplateRows: "auto 1fr auto",
+          position: "relative",
+          top: "0",
+          left: "0",
+        }}
+      >
+        <header
+          style={{
+            gridRow: "1fr",
+          }}
+        >
+          <Container>
+            <Group
+              position='apart'
+              style={{
+                background: "#FAFAFA",
+                padding: "0 10px",
+                borderRadius: "0 0" + theme.spacing.sm,
+                boxShadow: "1px 2px 1px rgba(0,0,0,0.05)",
+              }}
+            >
+              <Group>
+                <Link passHref href='/'>
+                  <h1
+                    style={{
+                      cursor: "pointer",
+                      fontSize: "1rem",
+                      background: "#283593",
+                      color: "#fff",
+                      borderRadius: "50px",
+                      padding: "5px 10px",
+                    }}
+                  >
+                    {GeneralConfig.appName}
+                  </h1>
+                </Link>
 
                 {NavItems.map((item) => (
-                  <div style={{ marginBottom: 1, marginRight: 10 }}>
+                  <div style={{ marginBottom: 1 }} key={item.id}>
                     <Link href={item.to} passHref>
-                      <ActionIcon size='lg'>
+                      <ActionIcon size='lg' variant='default'>
                         <item.icon size={18} />
                       </ActionIcon>
                     </Link>
                   </div>
                 ))}
-              </Grid>
-            </Col>
-            <Col span={1}>
-              <Grid justify='flex-end'>
-                <Col span={7}>
-                  <ActionIcon variant='filled' size='lg'>
-                    <User size={18} />
-                  </ActionIcon>
-                </Col>
-              </Grid>
-            </Col>
-          </Grid>
-        </Container>
-      </header>
-      <main>{children}</main>
+              </Group>
+              <Group position='right'>
+                <ActionIcon variant='filled' size='lg'>
+                  <User size={18} />
+                </ActionIcon>
+              </Group>
+            </Group>
+          </Container>
+        </header>{" "}
+        <main
+          style={{
+            gridTemplateRows: "auto",
+          }}
+        >
+          <Container>{children}</Container>
+        </main>
+        <footer
+          style={{
+            gridTemplateRows: "1fr",
+          }}
+        >
+          فوتر
+        </footer>
+      </div>
     </>
   );
 }

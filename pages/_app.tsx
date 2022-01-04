@@ -2,8 +2,11 @@ import { MantineProvider } from "@mantine/core";
 import rtlPlugin from "stylis-plugin-rtl";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const queryClient = new QueryClient();
+
   return (
     <MantineProvider
       withGlobalStyles
@@ -14,7 +17,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       }}
       emotionOptions={{ key: "mantine", stylisPlugins: [rtlPlugin] }}
     >
-      <Component {...pageProps} />
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
     </MantineProvider>
   );
 }
