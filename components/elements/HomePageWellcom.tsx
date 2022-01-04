@@ -1,31 +1,50 @@
-import { useMantineTheme } from "@mantine/core";
+import { useMantineTheme, Image } from "@mantine/core";
+import { heights } from "@mantine/core/lib/components/Badge/Badge.styles";
 
 function HomePageWellcom() {
   const theme = useMantineTheme();
+
   return (
     <div
       style={{
-        background: "#eeeeee",
+        background:
+          theme.colorScheme === "dark"
+            ? theme.colors.gray[9]
+            : theme.colors.gray[0],
         width: "100%",
         height: "400px",
         marginTop: theme.spacing.sm,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        borderRadius: "5px",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      <h1>
-        <span>چهره‌های برجسته</span>
-        <strong
-          style={{
-            marginRight: "10px",
-            color: "#283593",
-            textShadow: "1px 1px #283593",
-          }}
-        >
-          ایران
-        </strong>
-      </h1>
+      <Image src='/images/wellcome.svg' height='400px' />
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          top: 0,
+          right: 0,
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h1>
+          <span style={{ color: theme.colors.gray[0] }}>چهره‌های برجسته</span>
+          <strong
+            style={{
+              marginRight: "10px",
+              color: theme.colors.blue[3],
+              textShadow: `1px 1px ${theme.colors.blue[8]}`,
+            }}
+          >
+            ایران
+          </strong>
+        </h1>
+      </div>
     </div>
   );
 }

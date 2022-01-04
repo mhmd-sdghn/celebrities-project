@@ -2,19 +2,19 @@ import { ReactChildren, ReactChild } from "react";
 import Head from "next/head";
 import {
   Container,
-  Grid,
-  Col,
   ActionIcon,
   Group,
   useMantineTheme,
+  useMantineColorScheme,
 } from "@mantine/core";
 import Link from "next/link";
 import NavItems from "../../config/nav";
 import GeneralConfig from "../../config/general";
-import { User } from "react-feather";
+import { User, Sun, Moon } from "react-feather";
 
 function MainLayout({ children, title }: MainLayoutProps) {
   const theme = useMantineTheme();
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   return (
     <>
@@ -41,7 +41,10 @@ function MainLayout({ children, title }: MainLayoutProps) {
             <Group
               position='apart'
               style={{
-                background: "#FAFAFA",
+                background:
+                  theme.colorScheme === "dark"
+                    ? theme.colors.gray[9]
+                    : theme.colors.gray[0],
                 padding: "0 10px",
                 borderRadius: "0 0" + theme.spacing.sm,
                 boxShadow: "1px 2px 1px rgba(0,0,0,0.05)",
@@ -53,8 +56,8 @@ function MainLayout({ children, title }: MainLayoutProps) {
                     style={{
                       cursor: "pointer",
                       fontSize: "1rem",
-                      background: "#283593",
-                      color: "#fff",
+                      background: theme.colors.blue[9],
+                      color: theme.colors.blue[0],
                       borderRadius: "50px",
                       padding: "5px 10px",
                     }}
@@ -74,8 +77,19 @@ function MainLayout({ children, title }: MainLayoutProps) {
                 ))}
               </Group>
               <Group position='right'>
-                <ActionIcon variant='filled' size='lg'>
+                <ActionIcon variant='default' size='lg'>
                   <User size={18} />
+                </ActionIcon>
+                <ActionIcon
+                  variant='default'
+                  size='lg'
+                  onClick={() => toggleColorScheme()}
+                >
+                  {colorScheme === "dark" ? (
+                    <Sun size={18} />
+                  ) : (
+                    <Moon size={18} />
+                  )}
                 </ActionIcon>
               </Group>
             </Group>

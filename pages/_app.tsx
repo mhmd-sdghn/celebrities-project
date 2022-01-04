@@ -1,26 +1,44 @@
-import { MantineProvider } from "@mantine/core";
+import {
+  ColorScheme,
+  ColorSchemeProvider,
+  MantineProvider,
+} from "@mantine/core";
 import rtlPlugin from "stylis-plugin-rtl";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { useLocalStorageValue } from "@mantine/hooks";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
 
+  const [colorScheme, setColorScheme] = useLocalStorageValue<ColorScheme>({
+    key: "color-scheme",
+    defaultValue: "light",
+  });
+
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+
   return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      theme={{
-        /** Put your mantine theme override here */
-        colorScheme: "light",
-      }}
-      emotionOptions={{ key: "mantine", stylisPlugins: [rtlPlugin] }}
+    <ColorSchemeProvider
+      colorScheme={colorScheme}
+      toggleColorScheme={toggleColorScheme}
     >
-      <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
-      </QueryClientProvider>
-    </MantineProvider>
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          colorScheme,
+          fontFamily: "iranyekan",
+        }}
+        emotionOptions={{ key: "mantine", stylisPlugins: [rtlPlugin] }}
+      >
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+        </QueryClientProvider>
+      </MantineProvider>
+    </ColorSchemeProvider>
   );
 }
 

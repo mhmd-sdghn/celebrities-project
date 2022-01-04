@@ -44,12 +44,7 @@ function MyCard({ data }: { data: Celebrity }) {
           {data.description.substring(120)} و...
         </Text>
 
-        <Button
-          variant='light'
-          color='blue'
-          fullWidth
-          style={{ marginTop: 14 }}
-        >
+        <Button variant='light' fullWidth style={{ marginTop: 14 }}>
           مشاهده جزییات
         </Button>
       </Card>
