@@ -1,6 +1,7 @@
 {
-  "name": "hasan-uni-priject-v2",
-  "private": true,
+  "name": "celebrities-project",
+  "private": false,
+  "author": "Mo",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
