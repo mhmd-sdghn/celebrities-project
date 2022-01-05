@@ -7,15 +7,15 @@ import {
   Group,
   useMantineTheme,
 } from "@mantine/core";
-import { Celebrity } from "../../types/Response";
+import useStyles from "./styles";
+import { Celebrity } from "../../../types/Response";
 
 function MyCard({ data }: { data: Celebrity }) {
   if (!data) return <></>;
 
   const theme = useMantineTheme();
 
-  const secondaryColor =
-    theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
+  const { classes } = useStyles();
 
   return (
     <div>
@@ -24,27 +24,18 @@ function MyCard({ data }: { data: Celebrity }) {
           <Image src={data.image} height={160} alt='Norway' />
         </Card.Section>
 
-        <Group
-          position='apart'
-          style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
-        >
+        <Group position='apart' className={classes.wrapper}>
           <Text weight={500}>{data.title}</Text>
           <Badge color='pink' variant='light'>
             <p>{data.face}</p>
           </Badge>
         </Group>
 
-        <Text
-          size='sm'
-          style={{
-            color: secondaryColor,
-            lineHeight: 1.5,
-          }}
-        >
+        <Text size='sm' className={classes.descriptionText}>
           {data.description.substring(120)} و...
         </Text>
 
-        <Button variant='light' fullWidth style={{ marginTop: 14 }}>
+        <Button variant='light' fullWidth className={classes.seeMoreBtn}>
           مشاهده جزییات
         </Button>
       </Card>
