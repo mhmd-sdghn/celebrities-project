@@ -12,8 +12,8 @@ function CardSkeleton() {
         </Card.Section>
 
         <Group position='apart' className={classes.wrapper}>
-          <Skeleton height={15} width={50} />
-          <Skeleton height={15} width={30} radius='xl' />
+          <Skeleton height={15} width={130} />
+          <Skeleton height={15} width={70} radius='xl' />
         </Group>
 
         <Skeleton height={8} radius='xl' mt={20} />

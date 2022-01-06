@@ -8,7 +8,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import useStyles from "./styles";
-import { Celebrity } from "../../../types/Response";
+import { Celebrity } from "../../../types/Celebrities";
 
 function MyCard({ data }: { data: Celebrity }) {
   if (!data) return <></>;
@@ -25,7 +25,7 @@ function MyCard({ data }: { data: Celebrity }) {
         </Card.Section>
 
         <Group position='apart' className={classes.wrapper}>
-          <Text weight={500}>{data.title}</Text>
+          <Text weight={800}>{data.title}</Text>
           <Badge color='pink' variant='light'>
             <p>{data.face}</p>
           </Badge>
