@@ -6,12 +6,15 @@ const useStyles = createStyles((theme) => ({
     marginTop: theme.spacing.sm,
   },
   descriptionText: {
-    color: theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];,
+    color:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[1]
+        : theme.colors.gray[7],
     lineHeight: 1.5,
   },
   seeMoreBtn: {
-    marginTop: 14
-  }
+    marginTop: 14,
+  },
 }));
 
 export default useStyles;

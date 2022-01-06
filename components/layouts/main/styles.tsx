@@ -37,6 +37,7 @@ const useStyles = createStyles((theme) => ({
     gridTemplateRows: "1fr",
     padding: theme.spacing.xl,
     display: "flex",
+    marginTop: theme.spacing.lg,
     alignItems: "center",
     justifyContent: "center",
     background:
