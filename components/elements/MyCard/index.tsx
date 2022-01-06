@@ -1,25 +1,15 @@
-import {
-  Card,
-  Image,
-  Text,
-  Badge,
-  Button,
-  Group,
-  useMantineTheme,
-} from "@mantine/core";
+import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
 import useStyles from "./styles";
 import { Celebrity } from "../../../types/Celebrities";
 
 function MyCard({ data }: { data: Celebrity }) {
   if (!data) return <></>;
 
-  const theme = useMantineTheme();
-
   const { classes } = useStyles();
 
   return (
-    <div>
-      <Card shadow='sm' padding='lg'>
+    <>
+      <Card shadow='sm' padding='lg' className={classes.container}>
         <Card.Section>
           <Image src={data.image} height={160} alt='Norway' />
         </Card.Section>
@@ -39,7 +29,7 @@ function MyCard({ data }: { data: Celebrity }) {
           مشاهده جزییات
         </Button>
       </Card>
-    </div>
+    </>
   );
 }
 

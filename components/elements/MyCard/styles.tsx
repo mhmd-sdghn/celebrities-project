@@ -1,6 +1,11 @@
 import { createStyles } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
+  container: {
+    height: "100%",
+    display: "grid",
+    gridTemplateRows: "auto auto 1fr auto",
+  },
   wrapper: {
     marginBottom: 5,
     marginTop: theme.spacing.sm,

@@ -30,11 +30,8 @@ const useStyles = createStyles((theme) => ({
     borderRadius: "50px",
     padding: "5px 10px",
   },
-  mainWrapper: {
-    gridTemplateRows: "auto",
-  },
+  mainWrapper: {},
   footerWrapper: {
-    gridTemplateRows: "1fr",
     padding: theme.spacing.xl,
     display: "flex",
     marginTop: theme.spacing.lg,
