@@ -4,4 +4,5 @@ export interface ResponseManagerProps extends AuxProps {
   children: any;
   isLoading: boolean;
   isError: boolean;
+  noData: boolean;
 }

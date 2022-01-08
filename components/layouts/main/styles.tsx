@@ -12,6 +12,7 @@ const useStyles = createStyles((theme) => ({
   },
   header: {
     gridRow: "1fr",
+    marginBottom: theme.spacing.xl,
   },
   headerWrapper: {
     background:
