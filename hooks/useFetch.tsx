@@ -12,7 +12,7 @@ function useFetch<T = unknown>(
 
   const query = useQuery<T, AxiosError>(
     [url, watch, router?.query],
-    handleGetRequest,
+    handleRequest,
     options
   );
 
@@ -24,7 +24,7 @@ function useFetch<T = unknown>(
  * we only use params that are exsit in watch array (key of param exists in watch array)
  * then we create URLSearchParams and additions it to request url
  */
-async function handleGetRequest({
+async function handleRequest({
   queryKey: [url, watch, params],
   signal,
 }: QueryFunctionContext) {
