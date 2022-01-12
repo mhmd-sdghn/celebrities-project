@@ -4,9 +4,6 @@ import { useForm } from "react-hook-form";
 import usePost from "../../../hooks/usePost";
 import { LoginRequestData, LoginResponseData } from "../../../types/Login";
 
-const emailPattern =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
 export default function LoginForm() {
   const { mutate } = usePost<LoginResponseData, LoginRequestData>({
     url: "/auth/login",
@@ -37,12 +34,11 @@ export default function LoginForm() {
           {/* register your input into the hook by invoking the "register" function */}
           <Input
             icon={<User size={18} />}
-            placeholder='ایمیل'
-            {...register("email", {
+            placeholder='نام‌کاربری'
+            {...register("username", {
               required: true,
-              pattern: emailPattern,
             })}
-            invalid={errors.email}
+            invalid={errors.username}
           />
         </Col>
 
@@ -53,8 +49,6 @@ export default function LoginForm() {
             placeholder='********'
             {...register("password", {
               required: true,
-              min: 8,
-              max: 20,
             })}
             invalid={errors.password}
           />

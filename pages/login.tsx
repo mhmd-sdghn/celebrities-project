@@ -15,7 +15,7 @@ export default function Login() {
         }}
       >
         <Grid style={{ width: "100%" }} justify='center'>
-          <Col span={4}>
+          <Col span={12} xl={4} md={5} sm={6}>
             <Paper style={{ width: "100%" }} shadow='sm' padding='xl'>
               <LoginForm />
             </Paper>
