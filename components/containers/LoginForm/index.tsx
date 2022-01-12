@@ -2,16 +2,40 @@ import { Input, Button, LoadingOverlay, Grid, Col } from "@mantine/core";
 import { User, Key } from "react-feather";
 import { useForm } from "react-hook-form";
 import usePost from "../../../hooks/usePost";
+import { useNotifications } from "@mantine/notifications";
 import { LoginRequestData, LoginResponseData } from "../../../types/Login";
+import { useRouter } from "next/router";
 
 export default function LoginForm() {
-  const { mutate } = usePost<LoginResponseData, LoginRequestData>({
+  const notifications = useNotifications();
+
+  const router = useRouter();
+
+  const { mutate, isLoading } = usePost<LoginResponseData, LoginRequestData>({
     url: "/auth/login",
+    method: "POST",
   });
 
   const onSubmit = (data: LoginRequestData) => {
     mutate(data, {
-      onSuccess: (data, variables, context) => {},
+      onSuccess: () => {
+        // redirect user to admin page
+        notifications.showNotification({
+          title: "ورود موفق",
+          message: "در حال هدایت به صفحه مدیریت",
+          color: "green",
+        });
+
+        router.push("/manage");
+      },
+
+      onError: () => {
+        notifications.showNotification({
+          title: "ورود ناموفق",
+          message: "لطفا نام کاربری و رمز عبور خود را بررسی کنید 🤥",
+          color: "red",
+        });
+      },
     });
   };
 
@@ -20,8 +44,6 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const isLoading = false;
 
   return (
     <form
