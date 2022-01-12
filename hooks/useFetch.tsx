@@ -30,8 +30,8 @@ async function handleRequest({
 }: QueryFunctionContext) {
   if (typeof url === "string") {
     const _params: any = params && typeof params === "object" ? params : {};
-    const keyPrams = Object.keys(_params);
-    const valueParams = Object.values(_params);
+
+    console.log("salam");
 
     /**
      * in following lines we are filtering params object
@@ -49,6 +49,8 @@ async function handleRequest({
 
     if (Object.keys(queryParams).length) {
       queryParams = new URLSearchParams(queryParams).toString();
+    } else {
+      queryParams = "";
     }
 
     const { data } = await axios({

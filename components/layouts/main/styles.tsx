@@ -31,7 +31,10 @@ const useStyles = createStyles((theme) => ({
     borderRadius: "50px",
     padding: "5px 10px",
   },
-  mainWrapper: {},
+  mainWrapperCotainer: {
+    width: "100%",
+    height: "100%",
+  },
   footerWrapper: {
     padding: theme.spacing.xl,
     display: "flex",

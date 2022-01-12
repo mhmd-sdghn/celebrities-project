@@ -1,5 +1,6 @@
 import { ReactChildren, ReactChild } from "react";
 import Head from "next/head";
+import Link from "next/link";
 import {
   Container,
   ActionIcon,
@@ -7,7 +8,6 @@ import {
   useMantineTheme,
   useMantineColorScheme,
 } from "@mantine/core";
-import Link from "next/link";
 import NavItems from "../../../config/nav";
 import GeneralConfig from "../../../config/general";
 import { User, Sun, Moon } from "react-feather";
@@ -23,7 +23,7 @@ function MainLayout({ children, title }: MainLayoutProps) {
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{title || "چهره‌های برجسته"}</title>
       </Head>
       <div className={classes.container}>
         <header className={classes.header}>
@@ -46,9 +46,11 @@ function MainLayout({ children, title }: MainLayoutProps) {
                 ))}
               </Group>
               <Group position='right'>
-                <ActionIcon variant='default' size='lg'>
-                  <User size={18} />
-                </ActionIcon>
+                <Link href='/login' passHref>
+                  <ActionIcon variant='default' size='lg'>
+                    <User size={18} />
+                  </ActionIcon>
+                </Link>
                 <ActionIcon
                   variant='default'
                   size='lg'
@@ -64,8 +66,10 @@ function MainLayout({ children, title }: MainLayoutProps) {
             </Group>
           </Container>
         </header>
-        <main className={classes.mainWrapper}>
-          <Container>{children}</Container>
+        <main>
+          <Container className={classes.mainWrapperCotainer}>
+            {children}
+          </Container>
         </main>
         <footer className={classes.footerWrapper}>
           دانشگاه صنعتی سجاد | حسن ابویی

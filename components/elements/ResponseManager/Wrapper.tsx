@@ -20,10 +20,6 @@ function ResponseManagerWrapper(props: ResponseManagerProps) {
     (child: any) => child.type.name === "ResponseManagerNoData"
   );
 
-  useEffect(() => {
-    console.log(props);
-  }, [props]);
-
   return (
     <>
       {isError

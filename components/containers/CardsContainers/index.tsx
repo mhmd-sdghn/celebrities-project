@@ -1,19 +1,25 @@
 import { Grid, Col, useMantineTheme, Alert } from "@mantine/core";
-import useFetch from "../../hooks/useFetch";
-import { Celebrities, Celebrity, Response } from "../../types/Celebrities";
-import MyCard from "../elements/MyCard";
-import CardSkeleton from "../elements/MyCard/Skeleton";
+import useFetch from "../../../hooks/useFetch";
+import { Celebrities, Celebrity, Response } from "../../../types/Celebrities";
+import MyCard from "../../elements/MyCard";
+import CardSkeleton from "../../elements/MyCard/Skeleton";
 import { AlertCircle } from "react-feather";
-import ResponseManager from "../elements/ResponseManager";
+import ResponseManager from "../../elements/ResponseManager";
 
 function CardContainers() {
   const theme = useMantineTheme();
 
   const { data, isLoading, isError } = useFetch<Celebrities>("/celebrities");
 
+  const noData = !isLoading && (!data || (Array.isArray(data) && !data.length));
+
   return (
     <div style={{ marginTop: theme.spacing.lg }}>
-      <ResponseManager.Wrapper isError={isError} isLoading={isLoading}>
+      <ResponseManager.Wrapper
+        isError={isError}
+        isLoading={isLoading}
+        noData={noData}
+      >
         <ResponseManager.Error>
           <Alert
             icon={<AlertCircle size={16} />}
