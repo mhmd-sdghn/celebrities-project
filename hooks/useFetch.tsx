@@ -31,8 +31,6 @@ async function handleRequest({
   if (typeof url === "string") {
     const _params: any = params && typeof params === "object" ? params : {};
 
-    console.log("salam");
-
     /**
      * in following lines we are filtering params object
      *  base on watch array (read function comments for more)

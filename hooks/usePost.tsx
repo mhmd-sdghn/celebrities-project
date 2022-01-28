@@ -3,13 +3,12 @@ import { AxiosError, AxiosRequestConfig } from "axios";
 import { useMutation, UseMutationOptions } from "react-query";
 import axios from "../axios";
 
-
-function usePost<TResponse = unknown, TData = unknown>(
+function usePost<TResponse = unknown, TData = any>(
   axiosOptions: AxiosRequestConfig<TResponse>,
   options?: UseMutationOptions<TResponse, AxiosError, TData>
 ) {
-  const mutation = useMutation<TResponse, AxiosError, TData>(
-    (data) => handleRequest<TData>({ ...axiosOptions, data }),
+  const mutation = useMutation(
+    (data) => handleRequest<TData>({ ...axiosOptions, ...data }),
     options
   );
 
