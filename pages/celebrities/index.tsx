@@ -1,12 +1,12 @@
 import { Alert, Autocomplete, Col, Grid, Paper, Select } from "@mantine/core";
 import { useRouter } from "next/router";
 import { AlertCircle } from "react-feather";
-import MyCard from "../components/elements/MyCard";
-import CardSkeleton from "../components/elements/MyCard/Skeleton";
-import ResponseManager from "../components/elements/ResponseManager";
-import MainLayout from "../components/layouts/main";
-import useFetch from "../hooks/useFetch";
-import { Celebrities, Celebrity } from "../types/Celebrities";
+import MyCard from "../../components/elements/MyCard";
+import CardSkeleton from "../../components/elements/MyCard/Skeleton";
+import ResponseManager from "../../components/elements/ResponseManager";
+import MainLayout from "../../components/layouts/main";
+import useFetch from "../../hooks/useFetch";
+import { Celebrities, Celebrity } from "../../types/Celebrities";
 
 function Search() {
   const router = useRouter();
