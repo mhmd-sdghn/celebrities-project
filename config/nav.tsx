@@ -10,14 +10,8 @@ const NavItems = [
   {
     id: 2,
     label: "جستجو",
-    to: "/search",
+    to: "/celebrities",
     icon: Search,
-  },
-  {
-    id: 3,
-    label: "شخصیت‌ها",
-    to: "/‌‌‌celebreties",
-    icon: Users,
   },
 ];
 
