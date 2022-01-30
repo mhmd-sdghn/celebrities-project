@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
 import useStyles from "./styles";
 import { Celebrity } from "../../../types/Celebrities";
@@ -25,9 +26,11 @@ function MyCard({ data }: { data: Celebrity }) {
           {data.description.substring(120)} و...
         </Text>
 
-        <Button variant='light' fullWidth className={classes.seeMoreBtn}>
-          مشاهده جزییات
-        </Button>
+        <Link passHref href={`/celebrities/${data._id}`}>
+          <Button variant='light' fullWidth className={classes.seeMoreBtn}>
+            مشاهده جزییات
+          </Button>
+        </Link>
       </Card>
     </>
   );

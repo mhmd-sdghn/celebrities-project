@@ -17,26 +17,29 @@ export default function LoginForm() {
   });
 
   const onSubmit = (data: LoginRequestData) => {
-    mutate(data, {
-      onSuccess: () => {
-        // redirect user to admin page
-        notifications.showNotification({
-          title: "ورود موفق",
-          message: "در حال هدایت به صفحه مدیریت",
-          color: "green",
-        });
+    mutate(
+      { data },
+      {
+        onSuccess: () => {
+          // redirect user to admin page
+          notifications.showNotification({
+            title: "ورود موفق",
+            message: "در حال هدایت به صفحه مدیریت",
+            color: "green",
+          });
 
-        router.push("/manage");
-      },
+          router.push("/manage");
+        },
 
-      onError: () => {
-        notifications.showNotification({
-          title: "ورود ناموفق",
-          message: "لطفا نام کاربری و رمز عبور خود را بررسی کنید 🤥",
-          color: "red",
-        });
-      },
-    });
+        onError: () => {
+          notifications.showNotification({
+            title: "ورود ناموفق",
+            message: "لطفا نام کاربری و رمز عبور خود را بررسی کنید 🤥",
+            color: "red",
+          });
+        },
+      }
+    );
   };
 
   const {
