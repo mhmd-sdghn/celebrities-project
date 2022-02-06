@@ -1,8 +1,10 @@
 import {
+  ActionIcon,
   Button,
   Col,
   Drawer,
   Grid,
+  Group,
   Input,
   Select,
   Table,
@@ -12,13 +14,16 @@ import Layout from "../components/layouts/main";
 import useFetch from "../hooks/useFetch";
 import usePost from "../hooks/usePost";
 import { Celebrities, Celebrity } from "../types/Celebrities";
-import { Trash } from "react-feather";
+import { Trash, Edit } from "react-feather";
 import { useState } from "react";
 import { useNotifications } from "@mantine/notifications";
 import NewFaceDrawer from "../components/containers/NewFace";
+import EditFaceDrawer from "../components/containers/EditFace";
 
 export default function Manage() {
-  const [opened, setOpened] = useState(false);
+  const [isNewRecordDrawerOpen, setIsNewRecordDrawerOpen] = useState(false);
+
+  const [editRowData, setEditRowData] = useState();
 
   const notifications = useNotifications();
 
@@ -55,14 +60,23 @@ export default function Manage() {
           <td>{index + 1}</td>
           <td>{element.title}</td>
           <td>{element.birthday}</td>
-          <td>
-            <Button
-              color='red'
-              size='xs'
-              onClick={() => handleDelete(element._id)}
-            >
-              <Trash size={15} />
-            </Button>
+          <td style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Group>
+              <ActionIcon
+                color='red'
+                size='lg'
+                onClick={() => handleDelete(element._id)}
+              >
+                <Trash size={15} />
+              </ActionIcon>
+              <ActionIcon
+                color='blue'
+                size='lg'
+                onClick={() => setEditRowData(element)}
+              >
+                <Edit size={15} />
+              </ActionIcon>
+            </Group>
           </td>
         </tr>
       ))
@@ -70,8 +84,19 @@ export default function Manage() {
 
   return (
     <Layout>
-      <NewFaceDrawer opened={opened} refetch={refetch} setOpened={setOpened} />
-      <Button onClick={() => setOpened(true)}>ثبت چهره</Button>
+      <NewFaceDrawer
+        opened={isNewRecordDrawerOpen}
+        refetch={refetch}
+        setOpened={setIsNewRecordDrawerOpen}
+      />
+      <EditFaceDrawer
+        data={editRowData}
+        opened={!!editRowData}
+        refetch={refetch}
+        setOpened={(_: boolean) => setEditRowData(undefined)}
+      />
+
+      <Button onClick={() => setIsNewRecordDrawerOpen(true)}>ثبت چهره</Button>
       <Table>
         <thead>
           <tr>
