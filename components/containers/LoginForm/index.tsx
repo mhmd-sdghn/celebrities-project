@@ -5,6 +5,7 @@ import usePost from "../../../hooks/usePost";
 import { useNotifications } from "@mantine/notifications";
 import { LoginRequestData, LoginResponseData } from "../../../types/Login";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function LoginForm() {
   const notifications = useNotifications();
@@ -22,6 +23,7 @@ export default function LoginForm() {
       {
         onSuccess: () => {
           // redirect user to admin page
+          localStorage.setItem("isLogin", "true");
           notifications.showNotification({
             title: "ورود موفق",
             message: "در حال هدایت به صفحه مدیریت",
@@ -41,6 +43,8 @@ export default function LoginForm() {
       }
     );
   };
+
+  
 
   const {
     register,

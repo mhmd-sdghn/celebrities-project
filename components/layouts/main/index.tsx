@@ -1,4 +1,4 @@
-import { ReactChildren, ReactChild } from "react";
+import { ReactChildren, ReactChild, useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import {
@@ -10,8 +10,9 @@ import {
 } from "@mantine/core";
 import NavItems from "../../../config/nav";
 import GeneralConfig from "../../../config/general";
-import { User, Sun, Moon } from "react-feather";
+import { User, Sun, Moon, LogOut } from "react-feather";
 import useStyles from "./styles";
+import { useRouter } from "next/router";
 
 function MainLayout({ children, title }: MainLayoutProps) {
   const theme = useMantineTheme();
@@ -19,6 +20,21 @@ function MainLayout({ children, title }: MainLayoutProps) {
   const { classes } = useStyles();
 
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+
+  const [isLogin, setIsLogin] = useState(false);
+
+  const router = useRouter();
+
+  function handleLogout() {
+    localStorage.removeItem("isLogin");
+    router.push("/");
+  }
+
+  useEffect(() => {
+    const isLogin = localStorage.getItem("isLogin");
+
+    if (isLogin) setIsLogin(true);
+  }, []);
 
   return (
     <>
@@ -62,6 +78,15 @@ function MainLayout({ children, title }: MainLayoutProps) {
                     <Moon size={18} />
                   )}
                 </ActionIcon>
+                {isLogin ? (
+                  <ActionIcon
+                    variant='default'
+                    size='lg'
+                    onClick={handleLogout}
+                  >
+                    <LogOut size={18} />
+                  </ActionIcon>
+                ) : null}
               </Group>
             </Group>
           </Container>
