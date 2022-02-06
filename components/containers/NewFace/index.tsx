@@ -84,7 +84,20 @@ function NewFaceModal({ opened, refetch, setOpened }: NewFaceDrawerProps) {
             <Select
               onChange={(e: any) => setFace(e)}
               placeholder='دسته بندی'
-              data={["پزشکی و علوم تجربی", "شاعر", "ریاضی‌‌ دان"]}
+              data={[
+                "پزشکی و علوم تجربی",
+                "مهندسی",
+                "ریاضیات و فیزیک",
+                "سینما",
+                "موسیقی",
+                "هنرهای تجسمی",
+                "ادب و فرهنگ",
+                "الهیات",
+                "تاریخ",
+                "جغرافیا",
+                "فلسفه",
+                "علوم انسانی",
+              ]}
             />
           </Col>
           <Col span={12}>
