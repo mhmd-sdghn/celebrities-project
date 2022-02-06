@@ -80,7 +80,7 @@ function EditFaceModal({
       position='right'
       opened={opened}
       onClose={() => setOpened(false)}
-      title='ثبت چهره'
+      title='ویرایش چهره'
       padding='xl'
       size='xl'
     >
