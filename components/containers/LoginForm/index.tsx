@@ -44,8 +44,6 @@ export default function LoginForm() {
     );
   };
 
-  
-
   const {
     register,
     handleSubmit,
@@ -76,6 +74,7 @@ export default function LoginForm() {
           <Input
             icon={<Key size={18} />}
             placeholder='********'
+            type='password'
             {...register("password", {
               required: true,
             })}
