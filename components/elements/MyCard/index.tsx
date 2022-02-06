@@ -23,7 +23,7 @@ function MyCard({ data }: { data: Celebrity }) {
         </Group>
 
         <Text size='sm' className={classes.descriptionText}>
-          {data.description.substring(120)} و...
+          {data.description.substring(0, 200)} و...
         </Text>
 
         <Link passHref href={`/celebrities/${data._id}`}>
