@@ -1,24 +1,15 @@
-import {
-  ActionIcon,
-  Button,
-  Col,
-  Drawer,
-  Grid,
-  Group,
-  Input,
-  Select,
-  Table,
-  Textarea,
-} from "@mantine/core";
-import Layout from "../components/layouts/main";
-import useFetch from "../hooks/useFetch";
-import usePost from "../hooks/usePost";
-import { Celebrities, Celebrity } from "../types/Celebrities";
-import { Trash, Edit } from "react-feather";
+import { ActionIcon, Button, Group, Table, Tooltip } from "@mantine/core";
+import Layout from "../../components/layouts/main";
+import useFetch from "../../hooks/useFetch";
+import usePost from "../../hooks/usePost";
+import { Celebrities, Celebrity } from "../../types/Celebrities";
+import { Trash, Edit, ArrowRightCircle, PlusCircle } from "react-feather";
 import { useState } from "react";
 import { useNotifications } from "@mantine/notifications";
-import NewFaceDrawer from "../components/containers/NewFace";
-import EditFaceDrawer from "../components/containers/EditFace";
+import NewFaceDrawer from "../../components/containers/NewFace";
+import EditFaceDrawer from "../../components/containers/EditFace";
+
+import Link from "next/link";
 
 export default function Manage() {
   const [isNewRecordDrawerOpen, setIsNewRecordDrawerOpen] = useState(false);
@@ -62,19 +53,21 @@ export default function Manage() {
           <td>{element.birthday}</td>
           <td style={{ display: "flex", justifyContent: "flex-end" }}>
             <Group>
+              <Tooltip label='ویرایش' withArrow>
+                <ActionIcon
+                  color='blue'
+                  size='lg'
+                  onClick={() => setEditRowData(element)}
+                >
+                  <Edit size={15} />
+                </ActionIcon>
+              </Tooltip>
               <ActionIcon
                 color='red'
                 size='lg'
                 onClick={() => handleDelete(element._id)}
               >
                 <Trash size={15} />
-              </ActionIcon>
-              <ActionIcon
-                color='blue'
-                size='lg'
-                onClick={() => setEditRowData(element)}
-              >
-                <Edit size={15} />
               </ActionIcon>
             </Group>
           </td>
@@ -96,7 +89,21 @@ export default function Manage() {
         setOpened={(_: boolean) => setEditRowData(undefined)}
       />
 
-      <Button onClick={() => setIsNewRecordDrawerOpen(true)}>ثبت چهره</Button>
+      <Group position='apart'>
+        <Link href='/manage' passHref>
+          <a>
+            <Button color='gray' leftIcon={<ArrowRightCircle size={18} />}>
+              برگشت
+            </Button>
+          </a>
+        </Link>
+        <Button
+          onClick={() => setIsNewRecordDrawerOpen(true)}
+          leftIcon={<PlusCircle size={18} />}
+        >
+          ثبت چهره
+        </Button>
+      </Group>
       <Table>
         <thead>
           <tr>

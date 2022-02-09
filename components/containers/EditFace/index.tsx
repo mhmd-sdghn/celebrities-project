@@ -77,7 +77,8 @@ function EditFaceModal({
 
   return (
     <Drawer
-      position='right'
+      position='left'
+      transition='slide-left'
       opened={opened}
       onClose={() => setOpened(false)}
       title='ویرایش چهره'
@@ -132,6 +133,8 @@ function EditFaceModal({
             <Textarea
               placeholder='توضیحات'
               value={description}
+              minRows={10}
+              maxRows={15}
               onChange={(e: any) => setDescription(e.target.value)}
             />
           </Col>

@@ -53,7 +53,8 @@ function NewFaceModal({ opened, refetch, setOpened }: NewFaceDrawerProps) {
 
   return (
     <Drawer
-      position='right'
+      position='left'
+      transition='slide-left'
       opened={opened}
       onClose={() => setOpened(false)}
       title='ثبت چهره'
@@ -103,6 +104,8 @@ function NewFaceModal({ opened, refetch, setOpened }: NewFaceDrawerProps) {
           <Col span={12}>
             <Textarea
               placeholder='توضیحات'
+              minRows={10}
+              maxRows={15}
               onChange={(e: any) => setDescription(e.target.value)}
             />
           </Col>
