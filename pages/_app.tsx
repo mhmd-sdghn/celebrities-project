@@ -30,6 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         withGlobalStyles
         withNormalizeCSS
         theme={{
+          dir: "rtl",
           colorScheme,
           fontFamily: "iranyekan",
         }}

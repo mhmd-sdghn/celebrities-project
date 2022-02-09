@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
 import useStyles from "./styles";
 import { Celebrity } from "../../../types/Celebrities";
+import { Work } from "../../../types/Works";
 
 function MyCard({ data }: { data: Celebrity }) {
   if (!data) return <></>;

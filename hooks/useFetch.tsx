@@ -28,7 +28,7 @@ async function handleRequest({
   queryKey: [url, watch, params],
   signal,
 }: QueryFunctionContext) {
-  if (typeof url === "string") {
+  if (url && typeof url === "string") {
     const _params: any = params && typeof params === "object" ? params : {};
 
     /**

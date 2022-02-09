@@ -1,18 +1,19 @@
 import { Alert, Autocomplete, Col, Grid, Paper, Select } from "@mantine/core";
 import { useRouter } from "next/router";
 import { AlertCircle } from "react-feather";
-import MyCard from "../../components/elements/MyCard";
-import CardSkeleton from "../../components/elements/MyCard/Skeleton";
+import MyCard from "../../components/elements/MyCardWork";
+import CardSkeleton from "../../components/elements/MyCardWork/Skeleton";
 import ResponseManager from "../../components/elements/ResponseManager";
 import MainLayout from "../../components/layouts/main";
 import useFetch from "../../hooks/useFetch";
-import { Celebrities, Celebrity } from "../../types/Celebrities";
+
+import { Work, Works } from "../../types/Works";
 
 function Search() {
   const router = useRouter();
 
-  const { data, isLoading, refetch, isError } = useFetch<Celebrities>(
-    "/celebrities/search",
+  const { data, isLoading, refetch, isError } = useFetch<Works>(
+    "/works/search",
     undefined,
     ["q"]
   );
@@ -20,7 +21,7 @@ function Search() {
   function onSearch(text: string | undefined) {
     router.push(
       {
-        pathname: "/celebrities",
+        pathname: "/works",
         query: { ...router.query, q: text },
       },
       undefined,
@@ -96,7 +97,7 @@ function Search() {
               <Grid>
                 {!data || !Array.isArray(data) || isLoading
                   ? null
-                  : data.map((item: Celebrity) => (
+                  : data.map((item: Work) => (
                       <Col span={4} key={item._id}>
                         <MyCard data={item} />
                       </Col>

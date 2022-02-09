@@ -2,6 +2,7 @@
   "name": "celebrities-project",
   "private": false,
   "author": "Mo",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

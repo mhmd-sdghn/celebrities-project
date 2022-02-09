@@ -1,4 +1,4 @@
-import { Home, Search, Users } from "react-feather";
+import { Home } from "react-feather";
 
 const NavItems = [
   {
@@ -9,9 +9,15 @@ const NavItems = [
   },
   {
     id: 2,
-    label: "جستجو",
+    label: "چهره‌ها",
     to: "/celebrities",
-    icon: Search,
+    icon: "",
+  },
+  {
+    id: 3,
+    label: "آثار",
+    to: "/works",
+    icon: "",
   },
 ];
 

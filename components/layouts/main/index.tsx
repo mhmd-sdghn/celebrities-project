@@ -7,6 +7,7 @@ import {
   Group,
   useMantineTheme,
   useMantineColorScheme,
+  Button,
 } from "@mantine/core";
 import NavItems from "../../../config/nav";
 import GeneralConfig from "../../../config/general";
@@ -54,9 +55,9 @@ function MainLayout({ children, title }: MainLayoutProps) {
                 {NavItems.map((item) => (
                   <div style={{ marginBottom: 1 }} key={item.id}>
                     <Link href={item.to} passHref>
-                      <ActionIcon size='lg' variant='default'>
-                        <item.icon size={18} />
-                      </ActionIcon>
+                      <Button size='sm' variant='default'>
+                        {item.label}
+                      </Button>
                     </Link>
                   </div>
                 ))}
