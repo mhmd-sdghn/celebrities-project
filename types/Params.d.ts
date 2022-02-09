@@ -1,4 +1,5 @@
 import { Celebrity } from "./Celebrities";
+import { Work } from "./Works";
 export interface NewFaceDrawerProps {
   opened: boolean;
   refetch: () => void;
@@ -7,4 +8,8 @@ export interface NewFaceDrawerProps {
 
 export interface EditFaceDrawerProps extends NewFaceDrawerProps {
   data: Celebrity | undefined;
+}
+
+export interface EditWorkDrawerProps extends NewFaceDrawerProps {
+  data: Work | undefined;
 }

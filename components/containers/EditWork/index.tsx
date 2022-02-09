@@ -5,32 +5,35 @@ import {
   Grid,
   Input,
   Select,
+  Text,
   Textarea,
 } from "@mantine/core";
 import { useNotifications } from "@mantine/notifications";
 import { useEffect, useState } from "react";
+import useFetch from "../../../hooks/useFetch";
 import usePost from "../../../hooks/usePost";
-import { EditFaceDrawerProps } from "../../../types/Params";
+import { Celebrities, Celebrity } from "../../../types/Celebrities";
+import { EditWorkDrawerProps } from "../../../types/Params";
 
 function EditFaceModal({
   opened,
   refetch,
   setOpened,
   data,
-}: EditFaceDrawerProps) {
+}: EditWorkDrawerProps) {
   if (!data) return <></>;
 
   const notifications = useNotifications();
 
   const [title, setTitle] = useState("");
-  const [birthday, setBirthday] = useState("");
-  const [image, setImage] = useState("");
-  const [face, setFace] = useState("");
+  const [face, setFace] = useState<Celebrity | string>();
   const [description, setDescription] = useState("");
 
-  const { mutate: mutatePost } = usePost({
+  const { data: faces } = useFetch<Celebrities>("/celebrities");
+
+  const { mutate: mutatePost, isLoading } = usePost({
     method: "PUT",
-    url: "/celebrities",
+    url: "/works",
   });
 
   function handleSubmit() {
@@ -39,9 +42,7 @@ function EditFaceModal({
         data: {
           id: data?._id,
           title,
-          image,
-          birthday,
-          face,
+          author: face,
           description,
         },
       },
@@ -51,7 +52,7 @@ function EditFaceModal({
           setOpened(false);
           notifications.showNotification({
             title: "ویرایش شد",
-            message: "چهره با موفقیت ویرایش شد",
+            message: "اثر با موفقیت ویرایش شد",
             color: "green",
           });
         },
@@ -62,15 +63,11 @@ function EditFaceModal({
   useEffect(() => {
     if (opened) {
       setTitle(data.title);
-      setImage(data.image);
-      setBirthday(data.birthday);
-      setFace(data.face);
+      setFace(data.author);
       setDescription(data.description);
     } else {
       setTitle("");
-      setImage("");
-      setBirthday("");
-      setFace("");
+      setFace(undefined);
       setDescription("");
     }
   }, [opened]);
@@ -81,7 +78,7 @@ function EditFaceModal({
       transition='slide-left'
       opened={opened}
       onClose={() => setOpened(false)}
-      title='ویرایش چهره'
+      title='ویرایش اثر'
       padding='xl'
       size='xl'
     >
@@ -89,45 +86,27 @@ function EditFaceModal({
         <Grid>
           <Col span={12}>
             <Input
-              placeholder='نام'
+              placeholder='عنوان'
               value={title}
               onChange={(e: any) => setTitle(e.target.value)}
             />
           </Col>
-          <Col span={12}>
-            <Input
-              placeholder='تاریخ تولد'
-              value={birthday}
-              onChange={(e: any) => setBirthday(e.target.value)}
-            />
-          </Col>
-          <Col span={12}>
-            <Input
-              placeholder='ادرس تصویر'
-              value={image}
-              onChange={(e: any) => setImage(e.target.value)}
-            />
-          </Col>
+
           <Col span={12}>
             <Select
               onChange={(e: any) => setFace(e)}
-              placeholder='دسته بندی'
-              value={face}
-              data={[
-                "پزشکی و علوم تجربی",
-                "مهندسی",
-                "ریاضیات و فیزیک",
-                "سینما",
-                "موسیقی",
-                "هنرهای تجسمی",
-                "ادب و فرهنگ",
-                "الهیات",
-                "تاریخ",
-                "جغرافیا",
-                "فلسفه",
-                "علوم انسانی",
-              ]}
+              placeholder='صاحب اثر'
+              searchable
+              data={(faces && Array.isArray(faces) ? faces : []).map(
+                (item: Celebrity) => ({
+                  label: item.title,
+                  value: item._id,
+                })
+              )}
             />
+            <Text size='sm' style={{ marginTop: 8 }}>
+              {typeof face === "object" ? face?.title : ""}
+            </Text>
           </Col>
           <Col span={12}>
             <Textarea
@@ -139,7 +118,11 @@ function EditFaceModal({
             />
           </Col>
           <Col span={12}>
-            <Button style={{ width: "100%" }} onClick={() => handleSubmit()}>
+            <Button
+              style={{ width: "100%" }}
+              onClick={() => handleSubmit()}
+              loading={isLoading}
+            >
               ثبت
             </Button>
           </Col>

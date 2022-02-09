@@ -2,12 +2,12 @@ import { ActionIcon, Button, Group, Table, Tooltip } from "@mantine/core";
 import Layout from "../../components/layouts/main";
 import useFetch from "../../hooks/useFetch";
 import usePost from "../../hooks/usePost";
-import { Celebrities, Celebrity } from "../../types/Celebrities";
+import { Works, Work } from "../../types/Works";
 import { Trash, Edit, ArrowRightCircle, PlusCircle } from "react-feather";
 import { useState } from "react";
 import { useNotifications } from "@mantine/notifications";
-import NewFaceDrawer from "../../components/containers/NewFace";
-import EditFaceDrawer from "../../components/containers/EditFace";
+import NewWorkDrawer from "../../components/containers/NewWork";
+import EditWorkDrawer from "../../components/containers/EditWork";
 
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ export default function Manage() {
 
   const notifications = useNotifications();
 
-  const { data, refetch } = useFetch<Celebrities>("/celebrities");
+  const { data, refetch } = useFetch<Works>("/works");
 
   const { mutate } = usePost({
     method: "DELETE",
@@ -26,7 +26,7 @@ export default function Manage() {
 
   function handleDelete(id: string) {
     mutate(
-      { url: `/celebrities/${id}` },
+      { url: `/works/${id}` },
       {
         onSuccess() {
           refetch();
@@ -46,11 +46,11 @@ export default function Manage() {
         لطفا صبر کنید
       </div>
     ) : (
-      data.map((element: Celebrity, index: number) => (
+      data.map((element: Work, index: number) => (
         <tr key={element._id}>
           <td>{index + 1}</td>
           <td>{element.title}</td>
-          <td>{element.birthday}</td>
+          <td>{element.author.title}</td>
           <td style={{ display: "flex", justifyContent: "flex-end" }}>
             <Group>
               <Tooltip label='ویرایش' withArrow>
@@ -76,13 +76,13 @@ export default function Manage() {
     );
 
   return (
-    <Layout title='مدیریت چهره‌ها'>
-      <NewFaceDrawer
+    <Layout title='مدیریت آثار'>
+      <NewWorkDrawer
         opened={isNewRecordDrawerOpen}
         refetch={refetch}
         setOpened={setIsNewRecordDrawerOpen}
       />
-      <EditFaceDrawer
+      <EditWorkDrawer
         data={editRowData}
         opened={!!editRowData}
         refetch={refetch}
@@ -101,7 +101,7 @@ export default function Manage() {
           onClick={() => setIsNewRecordDrawerOpen(true)}
           leftIcon={<PlusCircle size={18} />}
         >
-          ثبت چهره
+          ثبت اثر
         </Button>
       </Group>
       <Table>
@@ -109,7 +109,7 @@ export default function Manage() {
           <tr>
             <th style={{ textAlign: "right" }}>ردیف</th>
             <th style={{ textAlign: "right" }}>نام</th>
-            <th style={{ textAlign: "right" }}>تاریخ تولد</th>
+            <th style={{ textAlign: "right" }}>صاحب اثر</th>
             <th style={{ textAlign: "right" }}>عملیات</th>
           </tr>
         </thead>
